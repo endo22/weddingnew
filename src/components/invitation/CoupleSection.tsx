@@ -39,7 +39,7 @@ const CoupleSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.5, type: "spring" }}
               >
-                Carlos
+                Pengantin Pria
               </motion.div>
             </div>
             
@@ -77,7 +77,7 @@ const CoupleSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.7, type: "spring" }}
               >
-                Bella
+                Pengantin Wanita
               </motion.div>
             </div>
             
