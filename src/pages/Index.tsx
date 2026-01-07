@@ -5,13 +5,13 @@ import { AnimatePresence } from "framer-motion";
 import CoverSection from "@/components/invitation/CoverSection";
 import HeroSection from "@/components/invitation/HeroSection";
 import CoupleSection from "@/components/invitation/CoupleSection";
+import StorySection from "@/components/invitation/StorySection";
 import CountdownSection from "@/components/invitation/CountdownSection";
 import EventSection from "@/components/invitation/EventSection";
 import RSVPSection from "@/components/invitation/RSVPSection";
 import GallerySection from "@/components/invitation/GallerySection";
 import GiftSection from "@/components/invitation/GiftSection";
 import FooterSection from "@/components/invitation/FooterSection";
-import ThemeToggle from "@/components/invitation/ThemeToggle";
 import MusicPlayer from "@/components/invitation/MusicPlayer";
 
 const Index = () => {
@@ -51,13 +51,13 @@ const Index = () => {
         <>
           <HeroSection />
           <CoupleSection />
+          <StorySection />
           <CountdownSection />
           <EventSection />
           <RSVPSection />
           <GallerySection />
           <GiftSection />
           <FooterSection />
-          <ThemeToggle />
           <MusicPlayer autoPlay />
         </>
       )}

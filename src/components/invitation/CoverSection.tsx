@@ -8,9 +8,11 @@ interface CoverSectionProps {
 const CoverSection = ({ guestName, onOpen }: CoverSectionProps) => {
   return (
     <motion.section 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-cover bg-center"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-cover bg-center bg-no-repeat md:bg-top"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070')`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('/img/PRIM3257.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -32,7 +34,7 @@ const CoverSection = ({ guestName, onOpen }: CoverSectionProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          Pengantin Pria & Pengantin Wanita
+          Rocky FJ Pinem & Desy Marthalina Br Tarigan
         </motion.h1>
 
         <motion.div

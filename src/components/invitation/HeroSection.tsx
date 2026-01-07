@@ -4,13 +4,20 @@ const HeroSection = () => {
   return (
     <section 
       className="min-h-screen flex items-center justify-center relative bg-cover bg-center bg-fixed"
+      // style={{
+      //   backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069')`,
+      // }}
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069')`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('/img/PRIM3283.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-light to-transparent" />
+      
       <div className="text-center text-white px-6 py-20">
         <motion.p 
-          className="text-sm tracking-[0.3em] uppercase mb-4 text-gold-light"
+          className="text-sm tracking-[0.3em] uppercase mb-4 text-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -20,13 +27,13 @@ const HeroSection = () => {
         </motion.p>
 
         <motion.h1 
-          className="font-serif text-6xl md:text-8xl font-light mb-4"
+          className="font-serif text-4xl md:text-6xl font-light mb-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Carlos & Bella
+          Rocky FJ Pinem & Desy Marthalina Br Tarigan
         </motion.h1>
 
         <motion.div
@@ -44,7 +51,7 @@ const HeroSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          Jumat, 16 Januari 2026
+          Sabtu, 24 Januari 2026
         </motion.p>
 
         <motion.div

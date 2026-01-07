@@ -9,7 +9,7 @@ interface TimeLeft {
 }
 
 const CountdownSection = () => {
-  const weddingDate = new Date("2026-01-16T10:00:00").getTime();
+  const weddingDate = new Date("2026-01-24T10:00:00").getTime();
   
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
@@ -47,12 +47,14 @@ const CountdownSection = () => {
     <section 
       className="py-20 px-6 relative bg-cover bg-center bg-fixed"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070')`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('/img/PRIM3302.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
       <div className="max-w-4xl mx-auto text-center text-white">
         <motion.h2 
-          className="font-serif text-4xl md:text-5xl mb-4"
+          className="font-serif text-4xl md:text-5xl mb-4 text-white font-bold"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -73,16 +75,16 @@ const CountdownSection = () => {
           {timeBlocks.map((block, index) => (
             <motion.div
               key={block.label}
-              className="bg-white/10 backdrop-blur-sm rounded-lg p-4 md:p-6"
+              className="bg-white/70 backdrop-blur-sm rounded-lg p-4 md:p-6"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
             >
-              <div className="font-serif text-3xl md:text-5xl text-gold-light mb-2">
+              <div className="font-serif text-3xl md:text-5xl text-gold mb-2 font-bold">
                 {block.value.toString().padStart(2, "0")}
               </div>
-              <div className="text-xs md:text-sm tracking-wider uppercase opacity-80">
+              <div className="text-xs md:text-sm tracking-wider uppercase opacity-80 font-semibold text-gray-900">
                 {block.label}
               </div>
             </motion.div>
@@ -90,13 +92,13 @@ const CountdownSection = () => {
         </div>
 
         <motion.p 
-          className="mt-12 font-serif text-xl md:text-2xl text-gold-light"
+          className="mt-12 font-serif text-xl md:text-2xl text-white font-bold"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          Jumat, 16 Januari 2026
+          Sabtu, 24 Januari 2026
         </motion.p>
       </div>
     </section>

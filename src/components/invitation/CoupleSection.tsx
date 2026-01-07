@@ -27,8 +27,8 @@ const CoupleSection = () => {
             <div className="relative mb-6">
               <div className="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-4 border-gold/30">
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000" 
-                  alt="Carlos"
+                  src="/img/DSC06604.jpg" 
+                  alt="Rocky FJ Pinem"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -39,18 +39,18 @@ const CoupleSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.5, type: "spring" }}
               >
-                Pengantin Pria
+                Rocky
               </motion.div>
             </div>
             
             <h3 className="font-serif text-2xl md:text-3xl text-primary mt-6 mb-3">
-              Pengantin Pria
+              Rocky FJ Pinem
             </h3>
             <p className="text-muted-foreground leading-relaxed">
               Putra dari:<br />
-              <span className="font-medium">Bpk. Pengantin Pria, SE</span><br />
+              <span className="font-medium">Nasibta Pinem</span><br />
               &<br />
-              <span className="font-medium">Ibu Pengantin Pria</span>
+              <span className="font-medium">Serta Br Ginting (+)</span>
             </p>
           </motion.div>
 
@@ -65,8 +65,8 @@ const CoupleSection = () => {
             <div className="relative mb-6">
               <div className="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-4 border-gold/30">
                 <img 
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000" 
-                  alt="Bella"
+                  src="/img/DSC06610.jpg" 
+                  alt="Desy Marthalina Br Tarigan"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -77,18 +77,18 @@ const CoupleSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.7, type: "spring" }}
               >
-                Pengantin Wanita
+                Desy
               </motion.div>
             </div>
             
             <h3 className="font-serif text-2xl md:text-3xl text-primary mt-6 mb-3">
-              Pengantian Wanita
+              Desy Marthalina Br Tarigan
             </h3>
             <p className="text-muted-foreground leading-relaxed">
               Putri dari:<br />
-              <span className="font-medium">Bpk. Pengantin Wanita</span><br />
+              <span className="font-medium">Dekon Tarigan</span><br />
               &<br />
-              <span className="font-medium">Ibu Pengantin Wanita</span>
+              <span className="font-medium">Sumiyati Br Sembiring (+)</span>
             </p>
           </motion.div>
         </div>

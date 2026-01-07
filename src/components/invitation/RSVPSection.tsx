@@ -168,7 +168,16 @@ const RSVPSection = () => {
   }
 
   return (
-    <section className="py-20 px-6 bg-cream">
+    <section 
+      className="py-20 px-6 bg-cover bg-center bg-fixed relative"
+      style={{
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('/img/PRIM3302.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-light to-transparent" />
+      
       <div className="max-w-xl mx-auto">
         <motion.div 
           className="text-center mb-12"
@@ -177,10 +186,10 @@ const RSVPSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-serif text-4xl md:text-5xl text-primary mb-4">Konfirmasi Kehadiran</h2>
-          <div className="w-20 h-[1px] bg-gold mx-auto mb-4" />
-          <p className="text-muted-foreground">
-            Mohon konfirmasi kehadiran Anda sebelum tanggal 10 Januari 2026
+          <h2 className="font-serif text-4xl md:text-5xl text-white mb-4 font-bold">Konfirmasi Kehadiran</h2>
+          <div className="w-20 h-[1px] bg-gold-light mx-auto mb-4" />
+          <p className="text-white/80 font-semibold">
+            Mohon konfirmasi kehadiran Anda
           </p>
         </motion.div>
 
@@ -193,7 +202,7 @@ const RSVPSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <div>
-            <label className="block text-sm font-medium mb-2">Nama Lengkap</label>
+            <label className="block text-sm font-bold mb-2 text-white">Nama Lengkap</label>
             <Input
               placeholder="Masukkan nama Anda"
               value={formData.name}
@@ -203,7 +212,7 @@ const RSVPSection = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">Konfirmasi Kehadiran</label>
+            <label className="block text-sm font-bold mb-2 text-white">Konfirmasi Kehadiran</label>
             <Select
               value={formData.attendance}
               onValueChange={(value) => setFormData({ ...formData, attendance: value })}
@@ -222,7 +231,7 @@ const RSVPSection = () => {
           {formData.attendance === "hadir" && (
             <>
               <div>
-                <label className="block text-sm font-medium mb-2">Hadir di Acara</label>
+                <label className="block text-sm font-bold mb-2 text-white">Hadir di Acara</label>
                 <Select
                   value={formData.event}
                   onValueChange={(value) => setFormData({ ...formData, event: value })}
@@ -239,7 +248,7 @@ const RSVPSection = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Jumlah Tamu</label>
+                <label className="block text-sm font-bold mb-2 text-white">Jumlah Tamu</label>
                 <Select
                   value={formData.guests}
                   onValueChange={(value) => setFormData({ ...formData, guests: value })}
@@ -258,7 +267,7 @@ const RSVPSection = () => {
           )}
 
           <div>
-            <label className="block text-sm font-medium mb-2">Ucapan untuk Mempelai</label>
+            <label className="block text-sm font-bold mb-2 text-white">Ucapan untuk Mempelai</label>
             <Textarea
               placeholder="Tulis ucapan dan doa Anda..."
               value={formData.message}
@@ -267,14 +276,14 @@ const RSVPSection = () => {
               required
               maxLength={500}
             />
-            <div className="text-right text-xs text-muted-foreground mt-1">
+            <div className="text-right text-xs text-white/60 mt-1 font-semibold">
               {formData.message.length}/500
             </div>
           </div>
 
           <Button 
             type="submit" 
-            className="w-full bg-gold hover:bg-gold/90 text-primary-foreground"
+            className="w-full bg-gold hover:bg-gold/90 text-primary-foreground font-bold"
             disabled={isSubmitting}
           >
             <Send className="w-4 h-4 mr-2" />
@@ -291,20 +300,20 @@ const RSVPSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <div className="text-center mb-8">
-            <Heart className="w-8 h-8 text-gold mx-auto mb-4" />
-            <h3 className="font-serif text-3xl text-primary mb-2">Ucapan dari Tamu</h3>
-            <div className="w-16 h-[1px] bg-gold mx-auto" />
+            <Heart className="w-8 h-8 text-gold-light mx-auto mb-4" />
+            <h3 className="font-serif text-3xl text-white mb-2 font-bold">Ucapan dari Tamu</h3>
+            <div className="w-16 h-[1px] bg-gold-light mx-auto" />
           </div>
 
           {isLoadingWishes ? (
-            <div className="text-center text-muted-foreground py-8">
-              <p>Memuat ucapan...</p>
+            <div className="text-center text-white py-8">
+              <p className="font-semibold">Memuat ucapan...</p>
             </div>
           ) : (
             <div className="space-y-4 max-h-[500px] overflow-y-auto">
               {wishes.length === 0 ? (
-                <div className="text-center text-muted-foreground py-8">
-                  <p>Belum ada ucapan. Jadilah yang pertama! 💕</p>
+                <div className="text-center text-white py-8">
+                  <p className="font-semibold">Belum ada ucapan. Jadilah yang pertama! 💕</p>
                 </div>
               ) : (
                 wishes.map((wish, index) => (
@@ -322,12 +331,12 @@ const RSVPSection = () => {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-semibold text-foreground">{wish.name}</h4>
-                          <span className="text-xs text-muted-foreground">{formatTime(wish.timestamp)}</span>
+                          <h4 className="font-bold text-foreground">{wish.name}</h4>
+                          <span className="text-xs text-muted-foreground font-semibold">{formatTime(wish.timestamp)}</span>
                         </div>
-                        <p className="text-muted-foreground text-sm leading-relaxed mb-2">{wish.message}</p>
+                        <p className="text-muted-foreground text-sm leading-relaxed mb-2 font-medium">{wish.message}</p>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-xs text-muted-foreground font-semibold">
                             {wish.attendance === 'yes' ? '✅ Akan hadir' : '❌ Tidak dapat hadir'}
                           </span>
                         </div>
@@ -340,7 +349,7 @@ const RSVPSection = () => {
           )}
 
           <div className="mt-6 text-center">
-            <p className="text-muted-foreground text-sm">
+            <p className="text-white text-sm font-semibold">
               {wishes.length} ucapan dari tamu undangan
             </p>
           </div>
