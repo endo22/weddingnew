@@ -21,6 +21,9 @@ interface Wish {
   timestamp: Date;
 }
 
+// Google Apps Script Web App URL - akan diisi setelah deploy
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || "";
+
 const WishesSection = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -29,26 +32,40 @@ const WishesSection = () => {
   });
   const [wishes, setWishes] = useState<Wish[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Load wishes from localStorage on component mount
+  // Load wishes from Google Sheets
   useEffect(() => {
-    const savedWishes = localStorage.getItem('wedding-wishes');
-    if (savedWishes) {
-      const parsedWishes = JSON.parse(savedWishes);
-      const wishesWithDates = parsedWishes.map((wish: any) => ({
-        ...wish,
-        timestamp: new Date(wish.timestamp)
-      }));
-      setWishes(wishesWithDates);
-    }
+    const loadWishes = async () => {
+      if (!GOOGLE_SCRIPT_URL) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(GOOGLE_SCRIPT_URL);
+        const data = await response.json();
+        
+        if (data.wishes && Array.isArray(data.wishes)) {
+          const wishesData = data.wishes.map((wish: any) => ({
+            ...wish,
+            timestamp: new Date(wish.timestamp)
+          }));
+          setWishes(wishesData);
+        }
+      } catch (error) {
+        console.error("Error loading wishes:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadWishes();
+    
+    // Reload wishes every 30 seconds
+    const interval = setInterval(loadWishes, 30000);
+    return () => clearInterval(interval);
   }, []);
-
-  // Save wishes to localStorage whenever wishes change
-  useEffect(() => {
-    if (wishes.length > 0) {
-      localStorage.setItem('wedding-wishes', JSON.stringify(wishes));
-    }
-  }, [wishes]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -65,7 +82,7 @@ const WishesSection = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.attendance || !formData.message) {
@@ -73,26 +90,51 @@ const WishesSection = () => {
       return;
     }
 
+    if (!GOOGLE_SCRIPT_URL) {
+      alert('Konfigurasi Google Sheets belum diatur. Silakan hubungi admin.');
+      return;
+    }
+
     setIsSubmitting(true);
 
-    const newWish: Wish = {
-      id: Date.now().toString(),
-      name: formData.name,
-      attendance: formData.attendance as "yes" | "no",
-      message: formData.message,
-      timestamp: new Date()
-    };
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          attendance: formData.attendance,
+          message: formData.message,
+          timestamp: new Date().toISOString()
+        })
+      });
 
-    setWishes(prev => [newWish, ...prev]);
-    
-    setFormData({
-      name: "",
-      attendance: "",
-      message: ""
-    });
-    
-    setIsSubmitting(false);
-    alert('Terima kasih atas ucapan dan doanya! 💕');
+      // Add to local state immediately for better UX
+      const newWish: Wish = {
+        id: Date.now().toString(),
+        name: formData.name,
+        attendance: formData.attendance as "yes" | "no",
+        message: formData.message,
+        timestamp: new Date()
+      };
+      setWishes(prev => [newWish, ...prev]);
+
+      setFormData({
+        name: "",
+        attendance: "",
+        message: ""
+      });
+      
+      alert('Terima kasih atas ucapan dan doanya! 💕');
+    } catch (error) {
+      console.error("Error adding wish:", error);
+      alert('Terjadi kesalahan. Silakan coba lagi.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const formatTime = (date: Date) => {
@@ -199,13 +241,18 @@ const WishesSection = () => {
             Ucapan dari Tamu
           </h3>
           
-          <div className="space-y-4 max-h-[500px] overflow-y-auto">
-            {wishes.length === 0 ? (
-              <div className="text-center text-muted-foreground py-8">
-                <p>Belum ada ucapan. Jadilah yang pertama! 💕</p>
-              </div>
-            ) : (
-              wishes.map((wish, index) => (
+          {isLoading ? (
+            <div className="text-center text-muted-foreground py-8">
+              <p>Memuat ucapan...</p>
+            </div>
+          ) : (
+            <div className="space-y-4 max-h-[500px] overflow-y-auto">
+              {wishes.length === 0 ? (
+                <div className="text-center text-muted-foreground py-8">
+                  <p>Belum ada ucapan. Jadilah yang pertama! 💕</p>
+                </div>
+              ) : (
+                wishes.map((wish, index) => (
                 <motion.div
                   key={wish.id}
                   className="bg-background p-6 rounded-lg shadow-sm border border-border"
@@ -234,7 +281,8 @@ const WishesSection = () => {
                 </motion.div>
               ))
             )}
-          </div>
+            </div>
+          )}
         </div>
 
         <motion.div 
